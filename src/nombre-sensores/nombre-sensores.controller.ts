@@ -1,7 +1,8 @@
 // src/nombre-sensores/nombre-sensores.controller.ts
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param } from '@nestjs/common';
 import { NombreSensoresService } from './nombre-sensores.service';
-@Controller('nombre-sensores')
+
+@Controller('nombre_sensores')
 export class NombreSensoresController {
   constructor(private readonly nombreSensoresService: NombreSensoresService) {}
 
@@ -10,7 +11,7 @@ export class NombreSensoresController {
     return this.nombreSensoresService.findAll();
   }
 
-  @Get(':id')
+  @Post(':id')
   findOne(@Param('id') id: string) {
     return this.nombreSensoresService.findOne(+id);
   }

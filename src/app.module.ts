@@ -1,15 +1,14 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { NombreSensoresModule } from './nombre-sensores/nombre-sensores.module';
 import { NombreSensor } from './nombre-sensores/entities/nombre-sensor.entity';
 
 @Module({
   imports: [
-    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -23,7 +22,7 @@ import { NombreSensor } from './nombre-sensores/entities/nombre-sensor.entity';
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
         entities: [NombreSensor],
-        synchronize: true,
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),
