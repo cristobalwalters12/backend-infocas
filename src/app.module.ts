@@ -5,12 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { NombreSensoresModule } from './nombre-sensores/nombre-sensores.module';
+import { NombreSensor } from './nombre-sensores/entities/nombre-sensor.entity';
 
 @Module({
   imports: [
     UsersModule,
     ConfigModule.forRoot({
-      isGlobal: true, // Hace que ConfigModule esté disponible globalmente
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -21,7 +22,7 @@ import { NombreSensoresModule } from './nombre-sensores/nombre-sensores.module';
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [],
+        entities: [NombreSensor],
         synchronize: true,
       }),
       inject: [ConfigService],
