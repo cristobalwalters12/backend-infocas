@@ -5,7 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { NombreSensoresModule } from './nombre-sensores/nombre-sensores.module';
-import { NombreSensor } from './nombre-sensores/entities/nombre-sensor.entity';
+import { NombreSensor } from './entities/nombre-sensor.entity';
+import { SensoresModule } from './sensores/sensores.module';
+import { Sensores } from './entities/sensores.entity';
 
 @Module({
   imports: [
@@ -21,12 +23,13 @@ import { NombreSensor } from './nombre-sensores/entities/nombre-sensor.entity';
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [NombreSensor],
+        entities: [NombreSensor, Sensores],
         synchronize: false,
       }),
       inject: [ConfigService],
     }),
     NombreSensoresModule,
+    SensoresModule,
   ],
   controllers: [AppController],
   providers: [AppService],

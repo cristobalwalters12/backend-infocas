@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { NombreSensor } from './entities/nombre-sensor.entity';
+import { NombreSensor } from '../entities/nombre-sensor.entity';
 
 @Injectable()
 export class NombreSensoresService {
