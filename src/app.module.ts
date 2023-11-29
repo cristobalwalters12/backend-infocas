@@ -8,7 +8,7 @@ import { NombreSensoresModule } from './nombre-sensores/nombre-sensores.module';
 import { NombreSensor } from './entities/nombre-sensor.entity';
 import { SensoresModule } from './sensores/sensores.module';
 import { Sensores } from './entities/sensores.entity';
-
+import * as admin from 'firebase-admin';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,4 +34,12 @@ import { Sensores } from './entities/sensores.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const serviceAccount = require('../Firebase-credentials.json');
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  }
+}

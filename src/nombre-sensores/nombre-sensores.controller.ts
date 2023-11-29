@@ -1,8 +1,10 @@
 // src/nombre-sensores/nombre-sensores.controller.ts
-import { Controller, Get, Post, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, UseGuards } from '@nestjs/common';
 import { NombreSensoresService } from './nombre-sensores.service';
+import { FirebaseAuthGuard } from '../auth.guard';
 
 @Controller('nombre_sensores')
+@UseGuards(FirebaseAuthGuard)
 export class NombreSensoresController {
   constructor(private readonly nombreSensoresService: NombreSensoresService) {}
 
